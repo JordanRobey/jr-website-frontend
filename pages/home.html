@@ -1,0 +1,108 @@
+<body>
+  <div class="home-container">
+    <div class="container-left">
+      <div class="name-links">
+        <h1>Jordan Robey</h1>
+        <div class="links">
+          <p>LinkedIn</p>
+          <p>Github</p>
+        </div>
+      </div>
+    </div>
+    <div class="container-right"> 
+        <div class="about">
+            <h1>About Me:</h1>
+            <p>
+                Software Engineer currently working on a SaaS platform built with
+                <span
+                  ><a
+                    style="text-decoration: none"
+                    href="https://vuejs.org/"
+                    target="_blank"
+                    >Vue.js</a
+                  ></span
+                >, which helps clients improve advertisement spend by visualizing
+                robust audience data. I also work with Python and AWS in the creation
+                of internal API's and pipeline infrustructure. <br /><br />
+                I enjoy broadening my knowledge and writing about my experiences (see
+                <span>
+                  <router-link style="text-decoration: none" to="/blog"
+                    >Blog
+                  </router-link>
+                </span>
+                section).
+                <!-- <br /><br />
+                I like to solve problems, my work can be found
+                <span>
+                  <router-link style="text-decoration: none" to="/blog"
+                    >here.
+                  </router-link>
+                </span> -->
+                <br /><br />
+                In my spare time, I enjoy falling onto mats while attempting to
+                boulder and exploring local waterways in my kayak (which definitely
+                doesn't have it's own name). <br /><br />
+                <span style="color: grey"
+                  >“Everything should be made as simple as possible, but no simpler” -
+                  Albert Einstein</span
+                >
+              </p>
+              <div class="logos">
+                <p>logo</p>
+                <p>logo</p>
+                <p>logo</p>
+                <p>logo</p>
+              </div>
+        </div>
+    </div>
+  </div>
+  <style>
+    .home-container {
+      display: flex;
+      flex-direction: row;
+      height: 100%;
+      width: 100%;
+    }
+    .container-left {
+    display: flex;
+      background-color: red;
+      width: 50%;
+      justify-content: right;
+      align-items: center;
+    }
+    .name-links {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 60%;
+    }
+    .links {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 60%;
+    }
+    .container-right {
+        display: flex;
+      background-color: blue;
+      width: 50%;
+      justify-content: left;
+      align-items: center;
+    }
+    .about {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        max-width: 80%;
+    }
+    .logos {
+        display: flex;
+        flex-direction: row;
+        width: 60%;
+    }
+    .logos p {
+        padding-right: 10px;
+    }
+  </style>
+</body>

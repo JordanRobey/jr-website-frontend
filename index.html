@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jordan Robey</title>
+  </head>
+  <body>
+    <div class="container">
+      <header-component id="header"></header-component>
+      <div id="app"></div>
+      <footer-component id="footer"></footer-component>
+    </div>
+    <script type="module" src="js/main.js"></script>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      #app {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </body>
+</html>

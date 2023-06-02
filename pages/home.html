@@ -2,21 +2,27 @@
   <div class="home-container">
     <div class="container-left">
       <div class="name-links">
+        <div class="shape">
+          <div id="canvas"></div>
+        </div>
         <h1>Jordan Robey</h1>
         <div class="links">
-          <p>LinkedIn</p>
-          <p>Github</p>
+          <a href="https://github.com/jordanrobey" target="_blank">
+            <img src="assets/logos/github-logo.png" alt="GitHub" width="60" height="60">
+          </a>
+          <a href="https://www.linkedin.com/in/jordan-robey/" target="_blank">
+            <img src="assets/logos/linkedin-logo.png" alt="LinkedIn" width="60" height="60">
+          </a>
         </div>
       </div>
     </div>
     <div class="container-right"> 
         <div class="about">
-            <h1>About Me:</h1>
+            <h2>About Me:</h2>
             <p>
                 Software Engineer currently working on a SaaS platform built with
                 <span
                   ><a
-                    style="text-decoration: none"
                     href="https://vuejs.org/"
                     target="_blank"
                     >Vue.js</a
@@ -26,9 +32,9 @@
                 of internal API's and pipeline infrustructure. <br /><br />
                 I enjoy broadening my knowledge and writing about my experiences (see
                 <span>
-                  <router-link style="text-decoration: none" to="/blog"
+                  <a href="#blog"
                     >Blog
-                  </router-link>
+                </a>
                 </span>
                 section).
                 <!-- <br /><br />
@@ -48,10 +54,10 @@
                 >
               </p>
               <div class="logos">
-                <p>logo</p>
-                <p>logo</p>
-                <p>logo</p>
-                <p>logo</p>
+                <img src="assets/logos/js-logo.png" alt="GitHub" height="41">
+                <img src="assets/logos/vue-logo.png" alt="GitHub" height="44">
+                <img src="assets/logos/python-logo.png" alt="GitHub" height="47">
+                <img src="assets/logos/git-logo.png" alt="GitHub" height="41">
               </div>
         </div>
     </div>
@@ -65,7 +71,7 @@
     }
     .container-left {
     display: flex;
-      background-color: red;
+      /* border: 1px solid black; */
       width: 50%;
       justify-content: right;
       align-items: center;
@@ -76,6 +82,13 @@
       justify-content: center;
       align-items: center;
       width: 60%;
+
+    }
+
+    .name-links h1 {
+        font-size: 3rem;
+        margin-bottom: 30px;
+
     }
     .links {
         display: flex;
@@ -85,7 +98,7 @@
     }
     .container-right {
         display: flex;
-      background-color: blue;
+        /* border: 1px solid black; */
       width: 50%;
       justify-content: left;
       align-items: center;
@@ -96,13 +109,24 @@
         justify-content: center;
         max-width: 80%;
     }
+    .about a{
+      text-decoration: none; color: #41b883
+    }
+    .about h2 {
+        font-size: 2.5rem;
+    }
+    .about p {
+        font-size: 1.2rem;
+        line-height: 1.5;
+        margin-bottom: 50px;
+    }
     .logos {
         display: flex;
         flex-direction: row;
         width: 60%;
     }
-    .logos p {
-        padding-right: 10px;
+    .logos img {
+        padding-right: 60px;
     }
   </style>
 </body>

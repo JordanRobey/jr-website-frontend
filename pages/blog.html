@@ -7,21 +7,69 @@
   .blog-posts {
     display: flex;
     flex-direction: row;
-    height: 80%;
     width: 40%;
+    margin-top: 20px;
+  }
+  .blog-post {
+    display: flex;
+    flex-direction: column;
     border: 1px solid #ccc;
+    padding-left: 20px;
+  }
+  .blog-post h2 {
+    margin: 0;
+    padding: 5px 0;
+  }
+  .tag-pills {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding-right: 20px;
+    padding-bottom: 10px;
+  }
+  .tag.active {
+  color: rgb(44, 173, 44);
+  }
+  .tag-pill {
+  display: inline-block;
+  background-color: #ddffdc;
+  border-radius: 1rem;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.9rem;
+  color: #333;
+  margin-right: 5px;
+}
+  .blog-post p {
+    margin: 0;
+    padding-bottom: 15px;
+    padding-top: 15px;
+  }
+  .blog-post:hover {
+    cursor: pointer;
+    background-color: #eee;
+  }
+  .tag {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding-right: 20px;
+  }
+  .tag p:hover {
+    color: green;
+    cursor: pointer;
   }
   #tags-container {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    border: 1px solid #ccc;
   }
   #posts-container{
     display: flex;
     flex-direction: column;
-    flex-grow: 2;
-    border: 1px solid #ccc;
+    flex-grow: 1;
   }
 </style>
 </body>

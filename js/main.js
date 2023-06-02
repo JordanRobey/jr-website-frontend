@@ -1,119 +1,13 @@
-class Header extends HTMLElement {
-    constructor() {
-      super();
-      this.attachShadow({ mode: 'open' });
-    }
-  
-    connectedCallback() {
-      this.render();
-    }
-  
-    render() {
-      const template = document.createElement('template');
-      template.innerHTML = `
-        <header>
-          <h1>Jordan Robey</h1>
-          <nav>
-            <ul>
-              <li><a id="home-link" href=#home>Home</a></li> 
-              <li><a id="blog-link" href=#blog>Blog</a></li>
-              <li><a id="contact-link" href=#contact>Contact</a></li>
-            </ul>
-          </nav>
-        </header>
-
-        <style>
-            header {
-                display: flex;
-                flex-direction: column;;
-                justify-content: center;
-                align-items: center;
-                padding: 0 2rem;
-                background-color: #fff;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            }
-            header h1 {
-                font-size: 1.5rem;
-                font-weight: 600;
-                color: #333;
-            }
-            header nav ul {
-                display: flex;
-                list-style: none;
-                margin: 0;
-                padding: 0;
-            }
-            header nav ul li {
-                margin-right: 1rem; /* Add space between the li elements */
-              }
-      
-              header nav ul li:last-child {
-                margin-right: 0; /* Remove the right margin for the last li element */
-              }
-            header nav ul li a {
-                text-decoration: none;
-                color: #333;
-                font-weight: 600;
-            }
-            header nav ul li a:hover {
-                color: #000;
-            }
-        </style>
-
-      `;
-  
-      this.shadowRoot.appendChild(template.content.cloneNode(true));
-    }
-  }
-  
-  customElements.define('header-component', Header);
-  
-  
-
-  class Footer extends HTMLElement {
-    constructor() {
-      super();
-      this.attachShadow({ mode: 'open' });
-    }
-  
-    connectedCallback() {
-      this.render();
-    }
-  
-    render() {
-      const template = document.createElement('template');
-      template.innerHTML = `
-        <footer>
-          <p>&copy; 2023 Your Company. All rights reserved.</p>
-        </footer>
-  
-        <style>
-          footer {
-            background-color: #f5f5f5;
-            padding: 1rem;
-            text-align: center;
-          }
-  
-          p {
-            color: #666;
-            font-size: 0.8rem;
-            margin: 0;
-          }
-        </style>
-      `;
-  
-      this.shadowRoot.appendChild(template.content.cloneNode(true));
-    }
-  }
-  
-  customElements.define('footer-component', Footer);
-
   import * as ContactPage from './modules/contact.js';
   import * as BlogPage from './modules/blog.js';
+  import * as HomePage from './modules/home.js';
+  import './components/header.js'; 
+  import './components/footer.js'; 
 
   window.addEventListener("hashchange", loadContent); 
 
   function loadContent() {
+    console.log("loadContent")
     var contentDiv = document.getElementById("app");
     var hash = location.hash.substring(1);
     if (hash.startsWith('blog-post/')) {
@@ -148,6 +42,7 @@ class Header extends HTMLElement {
   function initializePageFunctionality(hash) {
     switch (hash) {
       case 'home':
+        HomePage.initializeHomePage();
         break;
       case 'blog':
         BlogPage.initializeBlogPage();

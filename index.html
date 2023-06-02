@@ -12,11 +12,22 @@
       <footer-component id="footer"></footer-component>
     </div>
     <script type="module" src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
     <style>
+      @font-face {
+        font-family: 'Roboto';
+        src: url('assets/fonts/RobotoMono-Regular.ttf') format('ttf')
+      }
+
       html, body {
+        font-family: 'Roboto', monospace;;
         height: 100%;
         margin: 0;
         padding: 0;
+        overflow-y: scroll;
+      }
+      button {
+        font-family: 'Roboto', monospace;
       }
       .container {
         height: 100%;
@@ -27,7 +38,6 @@
         flex-grow: 1;
         display: flex;
         justify-content: center;
-        align-items: center;
       }
     </style>
   </body>

@@ -15,7 +15,6 @@ export function initializeBlogPage() {
     }
   
     function getBlogPosts() {
-      console.log(apiUrl)
       return fetch(apiUrl + 'blog_posts', {
         method: 'GET',
       })
@@ -91,7 +90,6 @@ export function initializeBlogPage() {
       if (tag === 'All') {
         renderBlogPosts(); // Render all blog posts
       } else {
-        console.log(state.blogPosts)
         const filteredBlogPosts = state.blogPosts.filter(blogPost => blogPost.tags.includes(tag));
         renderBlogPosts(filteredBlogPosts); // Render filtered blog posts
       }
@@ -130,8 +128,7 @@ export function initializeBlogPostPage() {
     if (storedBlogPosts) {
       state.blogPosts = JSON.parse(storedBlogPosts); // Retrieve the stored blogPost
     }
-    
-    console.log('Blog page initialized');
+
     const titleDiv = document.getElementById("title-block");
     const contentDiv = document.getElementById("content-block");
     const sidebarContainer = document.getElementById('sidebar-next-blogs');
@@ -160,7 +157,6 @@ export function initializeBlogPostPage() {
         const nextBlogs = state.blogPosts.filter(blogPost => blogPost.title !== state.blogPost.title);
         const fiveBlogs = nextBlogs.slice(0, 5);
 
-        console.log(nextBlogs)
         fiveBlogs.forEach(blogPost => {
             const blogPostElement = document.createElement('div');
             blogPostElement.classList.add('next-blog-post');

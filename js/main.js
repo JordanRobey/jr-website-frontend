@@ -7,7 +7,6 @@
   window.addEventListener("hashchange", loadContent); 
 
   function loadContent() {
-    console.log("loadContent")
     var contentDiv = document.getElementById("app");
     var hash = location.hash.substring(1);
     if (hash.startsWith('blog-post/')) {

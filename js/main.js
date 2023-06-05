@@ -59,10 +59,10 @@
     var baseDir = window.location.pathname.split('/')[1]
     console.log(baseDir)
     var pages = {
-      "home": `/${baseDir}/pages/home.html`,
-      "blog": `/${baseDir}/pages/blog.html`,
-      "contact": `/${baseDir}/pages/contact.html`,
-      "blog-post": `/${baseDir}/pages/blogPost.html`
+      "home": "/pages/home.html",
+      "blog": "/pages/blog.html",
+      "contact": "/pages/contact.html",
+      "blog-post": "/pages/blogPost.html"
     };
     var filePath = pages[hash];
     return fetch(filePath)

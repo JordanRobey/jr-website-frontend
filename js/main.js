@@ -56,12 +56,13 @@
   }
 
   function getHTMLFile(hash) {
-
+    var baseDir = window.location.pathname.split('/')[1]
+    console.log(baseDir)
     var pages = {
-      "home": "/frontend/pages/home.html",
-      "blog": "/frontend/pages/blog.html",
-      "contact": "/frontend/pages/contact.html",
-      "blog-post": "/frontend/pages/blogPost.html"
+      "home": `/${baseDir}/pages/home.html`,
+      "blog": `/${baseDir}/pages/blog.html`,
+      "contact": `/${baseDir}/pages/contact.html`,
+      "blog-post": `/${baseDir}/pages/blogPost.html`
     };
     var filePath = pages[hash];
     return fetch(filePath)

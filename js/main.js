@@ -56,14 +56,25 @@
   }
 
   function getHTMLFile(hash) {
-    var baseDir = window.location.pathname.split('/')[1]
-    console.log(baseDir)
+    var baseDir = "";
+  
+    // Check if running on GitHub Pages
+    if (window.location.hostname === "jordanrobey.github.io") {
+      baseDir = "/jr-website-frontend";
+    }
+  
+    // Check if running on Live Server
+    if (window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost") {
+      baseDir = "/frontend";
+    }
+  
     var pages = {
-      "home": "/pages/home.html",
-      "blog": "/pages/blog.html",
-      "contact": "/pages/contact.html",
-      "blog-post": "/pages/blogPost.html"
+      "home": baseDir + "/pages/home.html",
+      "blog": baseDir + "/pages/blog.html",
+      "contact": baseDir + "/pages/contact.html",
+      "blog-post": baseDir + "/pages/blogPost.html"
     };
+  
     var filePath = pages[hash];
     return fetch(filePath)
       .then(response => {
@@ -73,5 +84,6 @@
         console.warn(error);
       });
   }
+  
   
   loadContent();

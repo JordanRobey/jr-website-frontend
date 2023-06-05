@@ -6,7 +6,7 @@ export function initializeContactPage() {
       e.preventDefault();
       const formData = new FormData(form);
       const data = Object.fromEntries(formData);
-        fetch('http://127.0.0.1:5000/messages/create', {
+        fetch(apiUrl + 'messages/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

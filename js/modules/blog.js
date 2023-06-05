@@ -15,7 +15,8 @@ export function initializeBlogPage() {
     }
   
     function getBlogPosts() {
-      return fetch('http://127.0.0.1:5000/blog_posts', {
+      console.log(apiUrl)
+      return fetch(apiUrl + 'blog_posts', {
         method: 'GET',
       })
         .then(response => {

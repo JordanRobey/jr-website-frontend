@@ -17,7 +17,6 @@
     getContent(hash)
       .then(htmlContent => {
         contentDiv.innerHTML = htmlContent}).then(()=>{
-          console.log(hash)
           initializePageFunctionality(hash);
         })
       .catch(error => {

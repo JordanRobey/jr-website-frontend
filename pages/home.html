@@ -18,7 +18,7 @@
     </div>
     <div class="container-right"> 
         <div class="about">
-            <h2>About Me:</h2>
+            <h2>About Me:</h2>      
             <p>
                 Software Engineer currently working on a SaaS platform built with
                 <span
@@ -86,7 +86,7 @@
     }
 
     .name-links h1 {
-        font-size: 3rem;
+        font-size: 2.7rem;
         margin-bottom: 30px;
 
     }
@@ -113,7 +113,7 @@
       text-decoration: none; color: #41b883
     }
     .about h2 {
-        font-size: 2.5rem;
+        font-size: 2.3rem;
     }
     .about p {
         font-size: 1.2rem;
@@ -128,5 +128,36 @@
     .logos img {
         padding-right: 60px;
     }
+
+    @media (max-width: 1200px) {
+      .home-container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+    }
+    .container-left {
+    display: flex;
+      /* border: 1px solid black; */
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+    .container-right {
+        display: flex;
+        /* border: 1px solid black; */
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+    .name-links h1 {
+      text-align: center;
+      margin: 0;
+      padding-bottom: 50px;
+    }
+    .logos img {
+        padding-right: 20px;
+    }
+  }
   </style>
 </body>

@@ -1,6 +1,7 @@
   import * as ContactPage from './modules/contact.js';
   import * as BlogPage from './modules/blog.js';
   import * as HomePage from './modules/home.js';
+  import * as AdminPage from './modules/admin.js';
   import './components/header.js'; 
   import './components/footer.js'; 
 
@@ -51,17 +52,15 @@
       case 'contact':
         ContactPage.initializeContactPage();
         break;
+      case 'admin':
+        AdminPage.initializeAdminPage();
+        break;
     }
   }
 
   function getHTMLFile(hash) {
     var baseDir = "";
-  
-    // Check if running on GitHub Pages
-    if (window.location.hostname === "jordanrobey.github.io") {
-      baseDir = "/jr-website-frontend";
-    }
-  
+    
     // Check if running on Live Server
     if (window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost") {
       baseDir = "/frontend";
@@ -71,7 +70,8 @@
       "home": baseDir + "/pages/home.html",
       "blog": baseDir + "/pages/blog.html",
       "contact": baseDir + "/pages/contact.html",
-      "blog-post": baseDir + "/pages/blogPost.html"
+      "blog-post": baseDir + "/pages/blogPost.html",
+      "admin": baseDir + "/pages/admin.html"
     };
   
     var filePath = pages[hash];

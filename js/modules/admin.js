@@ -33,8 +33,9 @@ function renderAdminLoggedIn() {
     document.getElementById('admin-container').innerHTML = `
         <div class="admin-logged-in">
             <h2>Admin Dashboard</h2>
-            <button id="create-post-button">Create Post</button>
-            <button id="edit-post-button">Edit Post</button>
+            <button id="create-post-button" style="background-color: green; color: white">Create Post</button>
+            <button id="edit-post-button" style="background-color: blue; color: white">Edit Post</button>
+            <button id="delete-post-button" style="background-color: red; color: white">Delete Posts</button>
             <button id="logout-button">Logout</button>
         </div>
     `;
@@ -42,6 +43,7 @@ function renderAdminLoggedIn() {
     const logoutButton = document.getElementById('logout-button');
     const createPostButton = document.getElementById('create-post-button');
     const editPostButton = document.getElementById('edit-post-button');
+    const deletePostButton = document.getElementById('delete-post-button');
     logoutButton.addEventListener('click', () => {
         logout();
     });
@@ -51,6 +53,10 @@ function renderAdminLoggedIn() {
     );
     editPostButton.addEventListener('click', () => {
         renderUpdatePostForm();
+    }
+    );
+    deletePostButton.addEventListener('click', () => {
+        renderDeletePostForm();
     }
     );
 }
@@ -85,6 +91,35 @@ function renderAdminLogin() {
     });
 }
 
+function renderDeletePostForm() {
+        fetch(apiUrl + 'blog_posts', {
+        method: 'GET',
+      })
+        .then(response => {
+          return response.json();
+        })
+        .then((data) => {
+            const adminContainer = document.getElementById('admin-container')
+            adminContainer.innerHTML = ''
+            const blogPosts = [...data]
+
+            for (let i = 0; i < blogPosts.length; i++) {
+                let post = document.createElement("div")
+                post.innerHTML = `
+                    <div>
+                        <p>${blogPosts[i].title}</p>
+                    </div>
+                `
+                adminContainer.appendChild(post)
+            }
+        
+
+        })
+        .catch(error => {
+          console.error('Error fetching blog posts:', error);
+        })
+
+}
 
 function renderCreatePostForm() {
     document.getElementById('admin-container').innerHTML = `
@@ -103,6 +138,7 @@ function renderCreatePostForm() {
                 <textarea id="content" name="content" required rows="10" cols="50"></textarea>
                 <button type="submit" id="create-post">Create Post</button>
             </form>
+            <button id="back-to-admin">Back to Admin</button>
         </div>
     `;
     var previewWindow = null;
@@ -133,11 +169,18 @@ function renderCreatePostForm() {
     var contentTextarea = document.getElementById('content');
     contentTextarea.addEventListener('input', updatePreview);
 
+    const backToAdmin = document.getElementById('back-to-admin');
+    backToAdmin.addEventListener('click', () => {
+        initializeAdminPage();
+    });
+
     const form = document.getElementById('create-post-form');
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         const formData = new FormData(form);
         const data = Object.fromEntries(formData);
+        data.author = JSON.parse(data.author);
+        data.tags = JSON.parse(data.tags);
         fetch(apiUrl + 'blog_posts/create', {
             method: 'POST',
             credentials: 'include',
@@ -149,8 +192,10 @@ function renderCreatePostForm() {
             .then(() => {
                 initializeAdminPage();
             })
+            .then(() => {
+                alert('Post updated!');
+            })
             .catch(error => {
-                console.error('Create post error:', error);
                 alert('Something went wrong. Please try again.');
             });
             
@@ -174,11 +219,13 @@ function renderCreatePostForm() {
                     <textarea id="content" data-provide="markdown" name="content" required rows="10" cols="50"></textarea>
                     <button type="submit" id="update-post">Update Post</button>
                 </form>
+                <button id="back-to-admin">Back to Admin</button>
             </div>
         `;
 
         function htmltoMarkdown(html) {
             var turndownService = new TurndownService();
+            turndownService.keep(['iframe']);
             var markdown = turndownService.turndown(html);
             return markdown
         }
@@ -201,7 +248,6 @@ function renderCreatePostForm() {
         function updatePreview() {
             var markdownInput = document.getElementById("content").value;
             var html = markdowntoHtml(markdownInput);
-            console.log(html)
         
             if (previewWindow.closed) {
                 openPreviewWindow();
@@ -245,6 +291,10 @@ function renderCreatePostForm() {
                     alert('Something went wrong. Please try again.');
                 });
     
+        const backToAdmin = document.getElementById('back-to-admin');
+        backToAdmin.addEventListener('click', () => {
+            initializeAdminPage();
+        });
     
         const form = document.getElementById('update-post-form');
         form.addEventListener('submit', (e) => {
@@ -263,11 +313,13 @@ function renderCreatePostForm() {
                 },
                 body: JSON.stringify(data)
             })
+            .then(() => {
+                alert('Post updated!');
+            })
                 .then(() => {
                     initializeAdminPage();
                 })
                 .catch(error => {
-                    console.error('Create post error:', error);
                     alert('Something went wrong. Please try again.');
                 });
                 

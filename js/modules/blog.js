@@ -6,10 +6,6 @@ let state = {
 export function initializeBlogPage() {
      
     async function loadBlogPosts() {
-      if (localStorage.getItem('blogPosts')) {
-        state.blogPosts = JSON.parse(localStorage.getItem('blogPosts'));
-        return
-      }
       await getBlogPosts()
         .then(data => {
           state.blogPosts = data;

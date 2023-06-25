@@ -6,6 +6,10 @@ let state = {
 export function initializeBlogPage() {
      
     async function loadBlogPosts() {
+      if (localStorage.getItem('blogPosts')) {
+        state.blogPosts = JSON.parse(localStorage.getItem('blogPosts'));
+        return
+      }
       await getBlogPosts()
         .then(data => {
           state.blogPosts = data;
@@ -37,7 +41,7 @@ export function initializeBlogPage() {
         blogPostElement.innerHTML = `
           <h2>${blogPost.title}</h2>
           <div class="tag-pills"></div>
-          <p>${blogPost.summary}</p>
+          <p>${blogPost.summary.substring(0,200) + " ..."}</p>
         `;
     
         const tagPills = blogPostElement.querySelector('.tag-pills');

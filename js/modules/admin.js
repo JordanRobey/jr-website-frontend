@@ -33,6 +33,7 @@ function renderAdminLoggedIn() {
     document.getElementById('admin-container').innerHTML = `
         <div class="admin-logged-in">
             <h2>Admin Dashboard</h2>
+            <button id="messages-button" style="background-color: purple; color: white">View Messages</button>
             <button id="create-post-button" style="background-color: green; color: white">Create Post</button>
             <button id="edit-post-button" style="background-color: blue; color: white">Edit Post</button>
             <button id="delete-post-button" style="background-color: red; color: white">Delete Posts</button>
@@ -41,12 +42,17 @@ function renderAdminLoggedIn() {
     `;
 
     const logoutButton = document.getElementById('logout-button');
+    const viewMsgsButton = document.getElementById("messages-button")
     const createPostButton = document.getElementById('create-post-button');
     const editPostButton = document.getElementById('edit-post-button');
     const deletePostButton = document.getElementById('delete-post-button');
     logoutButton.addEventListener('click', () => {
         logout();
     });
+    viewMsgsButton.addEventListener('click', () => {
+        renderViewMessages();
+    }
+    );
     createPostButton.addEventListener('click', () => {
         renderCreatePostForm();
     }
@@ -59,6 +65,43 @@ function renderAdminLoggedIn() {
         renderDeletePostForm();
     }
     );
+}
+
+function renderViewMessages() {
+    fetch(apiUrl + "messages", {
+        method: "GET",
+        credentials: "include"
+    })
+    .then(response => {return response.json()})
+    .then(data => {
+        const adminContainer = document.getElementById('admin-container')
+        adminContainer.innerHTML = '<h2>Messages</h2>'
+        let msgsTable = document.createElement("table")
+        msgsTable.innerHTML = `
+                <tr>
+                    <th>Date</th>
+                    <th>Email</th>
+                    <th>Body</th>
+                </tr>
+        `
+        adminContainer.appendChild(msgsTable)
+        data.forEach((msg) => {
+            let newRow = document.createElement("tr")
+            newRow.innerHTML = `
+                <td>${msg.created_at}</td>
+                <td>${msg.email}</td>
+                <td>${msg.body}</td>
+            `
+            msgsTable.appendChild(newRow)
+            })
+        const backToAdmin = document.createElement("button")
+        backToAdmin.innerHTML = 'Back to Admin'
+        backToAdmin.addEventListener('click', () => {
+            initializeAdminPage();
+        });
+        adminContainer.appendChild(backToAdmin)
+        })
+        .catch(error => console.log(error))
 }
 
 function renderAdminLogin() {
@@ -92,7 +135,22 @@ function renderAdminLogin() {
 }
 
 function renderDeletePostForm() {
-        fetch(apiUrl + 'blog_posts', {
+    function deletePost() {
+        fetch(apiUrl + `blog_posts/delete/${this.value}`,
+        {
+            method: 'DELETE',
+            credentials: 'include'
+        })
+        .then(response => {return response})
+        .finally(() => {
+            renderDeletePostForm()
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
+
+    fetch(apiUrl + 'blog_posts', {
         method: 'GET',
       })
         .then(response => {
@@ -106,14 +164,23 @@ function renderDeletePostForm() {
             for (let i = 0; i < blogPosts.length; i++) {
                 let post = document.createElement("div")
                 post.innerHTML = `
-                    <div>
+                    <div class="delete-post">
                         <p>${blogPosts[i].title}</p>
+                        <button class="delete-post-btn" value=${blogPosts[i].id}>Delete Post</button>
                     </div>
                 `
                 adminContainer.appendChild(post)
             }
-        
-
+            var delete_buttons = document.getElementsByClassName("delete-post-btn")
+            for (let i = 0; i < delete_buttons.length; i++) {
+                delete_buttons[i].onclick = deletePost
+            }
+            const backToAdmin = document.createElement("button")
+            backToAdmin.innerHTML = 'Back to Admin'
+            backToAdmin.addEventListener('click', () => {
+                initializeAdminPage();
+            });
+            adminContainer.appendChild(backToAdmin)
         })
         .catch(error => {
           console.error('Error fetching blog posts:', error);
@@ -260,6 +327,12 @@ function renderCreatePostForm() {
         
 
         let post_id = prompt("Enter post id to edit:")
+
+        if (!post_id) {
+            initializeAdminPage()
+            alert("No post id was supplied!")
+            return
+        }
 
         fetch(apiUrl + 'blog_posts/' + post_id, {
             method: 'GET',

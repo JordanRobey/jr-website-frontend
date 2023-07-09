@@ -101,7 +101,7 @@ function renderViewMessages() {
         });
         adminContainer.appendChild(backToAdmin)
         })
-        .catch(error => console.log(error))
+        .catch(error => error)
 }
 
 function renderAdminLogin() {
@@ -146,7 +146,7 @@ function renderDeletePostForm() {
             renderDeletePostForm()
         })
         .catch(error => {
-            console.log(error)
+            error
         })
     }
 
@@ -377,7 +377,6 @@ function renderCreatePostForm() {
             data.content = markdowntoHtml(data.content);
             data.author = JSON.parse(data.author);
             data.tags = JSON.parse(data.tags);
-            console.log(data)
             fetch(apiUrl + `blog_posts/update/${post_id}`, {
                 method: 'PUT',
                 credentials: 'include',
@@ -409,7 +408,6 @@ function renderCreatePostForm() {
           body: JSON.stringify(data)
         })
           .then(response => {
-            console.log(response);
             if (response.status === 200) {
               return response.json();
             } else {
